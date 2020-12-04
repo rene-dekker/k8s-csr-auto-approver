@@ -5,6 +5,7 @@ module k8s.io/sample-controller
 go 1.15
 
 require (
+	github.com/goombaio/namegenerator v0.0.0-20181006234301-989e774b106e // indirect
 	k8s.io/api v0.0.0-20201114085527-4a626d306b98
 	k8s.io/apimachinery v0.0.0-20201114085355-859536f6dc9b
 	k8s.io/client-go v0.0.0-20201114085741-77eda6a9395b

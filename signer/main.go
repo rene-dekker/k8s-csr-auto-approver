@@ -44,7 +44,7 @@ func main() {
 		if !ok {
 			log.Fatal("unexpected type in cert channel")
 		}
-		log.Printf("Yay, we get a CSR: %v", csr)
+		log.Printf("CSR: %v", csr)
 		cert := csr.DeepCopy()
 		if csr.Status.Certificate == nil {
 
@@ -53,13 +53,13 @@ func main() {
 			if err != nil {
 				log.Fatal("unexpected err when updating csr")
 			}
-			log.Printf("Yay, updated a CSR status: %v", r.Status)
+			log.Printf("CSR status updated: %v", r.Status)
 		} else if len(csr.Status.Conditions) == 0 {
 			cert.Status.Conditions = []v1beta1.CertificateSigningRequestCondition{
 				{
 					Type: v1beta1.CertificateApproved,
-					Message: "Rene has approved this",
-					Reason: "Rene does not care :)",
+					Message: "Approved",
+					Reason: "Approved",
 				},
 			}
 			certV1Client.CertificateSigningRequests().UpdateApproval(ctx, cert, metaV1.UpdateOptions{})
@@ -68,6 +68,6 @@ func main() {
 }
 
 func init() {
-	flag.StringVar(&kubeconfig, "kubeconfig", "/home/rd/bzprofiles/eks/.local/kubeconfig", "Path to a kubeconfig. Only required if out-of-cluster.")
+	flag.StringVar(&kubeconfig, "kubeconfig", "/home/rd/bzprofiles/kadm/.local/kubeconfig", "Path to a kubeconfig. Only required if out-of-cluster.")
 	flag.StringVar(&masterURL, "master", "127.0.0.1:8001", "The address of the Kubernetes API server. Overrides any value in kubeconfig. Only required if out-of-cluster.")
 }
